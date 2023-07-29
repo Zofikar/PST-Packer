@@ -20,8 +20,8 @@ In Main() you can see call to Test() with default value of false which means tha
 ### How to get my values?
 Pass pieceType and squareIndex as ints into GetValue function it gives you. 
 **Watch out pieceType starts with 0 as a pawn in this function so make sure to either modify this function or decrement piece type value.**
-It will return touple representing early and late stage(at least in my implementation) values which you can use to lerp between them based on state of the game or simply just pick one that fits you more at the exact time.
-It is possible to modify code to get only single stage if thats what you want it will save you about half of tokens over 100
+It will return touple representing early and late stage(at least in my implementation) values which you can use to lerp between them based on state of the game or simply just pick one that fits you more at the exact time. To get values from black perspective just pass 64 - squareIndex as chessboard is symetrical this should work just as good.
+It is possible to modify code to get only single stage if thats what you want it will save you about half of tokens over 100.
 
 
 ## If you see way to optimize, speed up or reduce token count I would apprieciete if you would share it
