@@ -25,3 +25,4 @@ It is possible to modify code to get only single stage if thats what you want it
 
 
 ## If you see way to optimize, speed up or reduce token count I would apprieciete if you would share it
+### Convert to decimals if possible
