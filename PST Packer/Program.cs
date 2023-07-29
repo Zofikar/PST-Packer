@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Numerics;
+using System.Linq;
 using PST_Packer;
 
 class Program
 {
-    //bits to pack default is last 3
-    static int BitsToPack = 4;
+    // bits to pack default is last 3
+    // automated!
+    static int BitsToPack = 3;
     // remember to add arrays in good spot to All[]
     static int PieceTypesCount = 6;
+    // to get negative values make negative offset as packer doesnt check sign
+    static int offset = -5;
+    // if you need to multiply your values by static factor after adding offset use this
+    static int multiplier = 1;
+    // if you want different datatype make sure to update other functions
     static List<ulong> Packed = new();
-    //BigInteger val = (BigInteger)320265757102059730318470218759311257840;
-    static Stopwatch stopWatch = new Stopwatch();
-    static int calls = 0; 
 
-    static int[][][] All = new int[2][][] { new int[6][] { PST.PawnEarly, PST.KnightEarly, PST.BishopEarly, PST.RookEarly, PST.QueenEarly, PST.KingEarly }, new int[][] { PST.PawnLate, PST.KnightLate, PST.BishopLate, PST.RookLate, PST.QueenLate, PST.KingLate } };
+
+    // Not important
+    static Stopwatch stopWatch = new Stopwatch();
+    static int calls = 0;
+
+    static int[][][] All = new int[2][][] { new int[6][] { PST.PawnEarly, PST.KnightEarly, PST.BishopEarly, PST.RookEarly, PST.QueenEarly, PST.KingEarly }, new int[6][] { PST.PawnLate, PST.KnightLate, PST.BishopLate, PST.RookLate, PST.QueenLate, PST.KingLate } };
 
     static int Main()
     {
@@ -30,34 +36,24 @@ class Program
             return 1;
         }
         Console.WriteLine("Everything went good\nTest was passed\n");
+        string offsetString = (offset != 0 ? (offset > 0 ? $" + {offset}" : $" - {-offset}") : "");
+        string returnString = (multiplier != 0 && multiplier != 1 ? $"return ( (Early{offsetString})*{multiplier}, (Late{offsetString})*{multiplier} )" : $"return ( Early{offsetString}, Late{offsetString} )");
         string output = $@"
-static int BitsToPack = {BitsToPack};
-static int PieceTypesCount = {PieceTypesCount};
 static ulong[] Packed = {{
-    {string.Join(",\n\t", Packed)}
+        {string.Join(",\n\t", Packed)}
 }};
 static (int, int) GetValue(int pieceType, int SquareIndex)
 {{
-    int Early = 0;
-    int Late = 0;
-    ulong bit;
-    for (int bitIndex = 0; bitIndex < BitsToPack; bitIndex++)
+    int Early = 0, Late = 0;
+    for (int bitIndex = 0; bitIndex < {BitsToPack}; bitIndex++)
     {{
-        var index = bitIndex*2+pieceType*(BitsToPack*2);
-        bit = Packed[index];
-        Early <<= 1;
-        Early += GetBit(bit, SquareIndex);
-        bit = Packed[index+1];
-        Late <<= 1;
-        Late += GetBit(bit, SquareIndex);
+        var index = bitIndex * 2 + pieceType * ({BitsToPack} * 2);
+        Early = Early << 1 | GetBit(Packed[index], SquareIndex);
+        Late = Late << 1 | GetBit(Packed[index + 1], SquareIndex);
     }}
-    return (Early, Late);
+    {returnString};
 }}
-static int GetBit(ulong number, int index)
-{{
-    ulong mask = 1UL << index;
-    return (number & mask) != 0 ? 1 : 0;
-}}
+static int GetBit(ulong number, int index) => (int)((number >> index) & 1);
 ";
         Console.WriteLine(output);
         Console.WriteLine("\nCopy this into your code and you should be good to go!");
@@ -88,32 +84,30 @@ static int GetBit(ulong number, int index)
         }
     }
 
-    static (int, int) GetValue(int pieceType, int SquareIndex)
+    static (int, int) GetValueWrapper(int pieceType, int SquareIndex)
     {
         calls++;
         stopWatch.Start();
-        int Early = 0;
-        int Late = 0;
-        ulong bit;
+        var result = GetValue(pieceType, SquareIndex);
+        stopWatch.Stop();
+        return result;
+    }
+
+    static (int, int) GetValue(int pieceType, int SquareIndex)
+    {
+        int Early = 0, Late = 0;
         for (int bitIndex = 0; bitIndex < BitsToPack; bitIndex++)
         {
-            var index = bitIndex*2+pieceType*(BitsToPack*2);
-            bit = Packed[index];
-            Early <<= 1;
-            Early += GetBit(bit, SquareIndex);
-            bit = Packed[index+1];
-            Late <<= 1;
-            Late += GetBit(bit, SquareIndex);
+            var index = bitIndex * 2 + pieceType * (BitsToPack * 2);
+            Early = Early << 1 | GetBit(Packed[index], SquareIndex);
+            Late = Late << 1 | GetBit(Packed[index + 1], SquareIndex);
         }
-        stopWatch.Stop();
         return (Early, Late);
     }
 
-    static int GetBit(ulong number, int index)
-    {
-        ulong mask = 1UL << index;
-        return (number & mask) != 0 ? 1 : 0;
-    }
+    static int GetBit(ulong number, int index) => (int)((number >> index) & 1);
+
+
 
     static ulong GetBit(int number, int index)
     {
@@ -147,7 +141,7 @@ static int GetBit(ulong number, int index)
         {
             for (int squareIndex = 0; squareIndex < 64; squareIndex++)
             {
-                (int, int) returned = GetValue(pieceType, squareIndex);
+                (int, int) returned = GetValueWrapper(pieceType, squareIndex);
                 (int, int) correct = (All[0][pieceType][squareIndex], All[1][pieceType][squareIndex]);
                 
 
