@@ -8,7 +8,7 @@ namespace PST_Packer
 {
     public static class PST
     {
-        public static int[] PawnEarly = 
+        public static uint[] PawnEarly = 
 {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -19,7 +19,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
 };
-        public static int[] PawnLate = 
+        public static uint[] PawnLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -30,7 +30,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] KnightEarly = 
+        public static uint[] KnightEarly = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -41,7 +41,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] KnightLate = 
+        public static uint[] KnightLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -52,7 +52,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] BishopEarly = 
+        public static uint[] BishopEarly = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -63,7 +63,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] BishopLate = 
+        public static uint[] BishopLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -74,7 +74,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] RookEarly = 
+        public static uint[] RookEarly = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -85,7 +85,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] RookLate = 
+        public static uint[] RookLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -96,7 +96,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] QueenEarly = 
+        public static uint[] QueenEarly = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -107,7 +107,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] QueenLate = 
+        public static uint[] QueenLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -118,7 +118,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] KingEarly = 
+        public static uint[] KingEarly = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,
@@ -129,7 +129,7 @@ namespace PST_Packer
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7
         };
-        public static int[] KingLate = 
+        public static uint[] KingLate = 
         {
         0, 1, 2, 3, 4, 5, 6, 7,
         0, 1, 2, 3, 4, 5, 6, 7,

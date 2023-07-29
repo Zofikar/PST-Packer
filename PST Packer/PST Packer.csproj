@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -6,6 +6,8 @@
 		<RootNamespace>PST_Packer</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<IsPackable>true</IsPackable>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 	<ItemGroup>
 		<Reference Include="Microsoft.CodeAnalysis">
@@ -20,6 +22,13 @@
 		<Compile Update="PST.cs">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\.gitignore" Link=".gitignore"/>
+		<None Include="..\.gitattributes" Link=".gitattributes"/>
+		<None Include="..\LICENSE.txt" Link="LICENSE.txt"/>
+		<None Include="..\README.md" Link="README.md"/>
 	</ItemGroup>
 
 </Project>
