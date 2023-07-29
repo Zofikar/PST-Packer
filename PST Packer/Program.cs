@@ -44,7 +44,7 @@ class Program
 static ulong[] Packed = {{
         {string.Join(",\n\t", Packed)}
 }};
-static (int, int) GetValue(int pieceType, int SquareIndex)
+static (int, int) GetValue(int pieceType, int squareIndex)
 {{
     int Early = 0, Late = 0;
     for (int bitIndex = 0; bitIndex < {BitsToPack}; bitIndex++)
@@ -86,11 +86,11 @@ static (int, int) GetValue(int pieceType, int SquareIndex)
         }
     }
 
-    static (int, int) GetValueWrapper(int pieceType, int SquareIndex)
+    static (int, int) GetValueWrapper(int pieceType, int squareIndex)
     {
         calls++;
         stopWatch.Start();
-        var result = GetValue(pieceType, SquareIndex);
+        var result = GetValue(pieceType, squareIndex);
         stopWatch.Stop();
         return result;
     }
